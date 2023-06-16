@@ -18,6 +18,8 @@ void inputarr(int a[], int pn){
     }
 }
 int main() {
+
+    printf("Anh em vao choi so xo di \n");
     int a[50];
     int n;
     printf("Input n : ");
