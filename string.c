@@ -21,16 +21,29 @@ char lTrim(char *c){
     return *c;
 }
 char rTrim(char *c){
-    
+    int i = strlen(c) - 1 ;
+    while(c[i] == ' ') {
+        i--;
+        c[i + 1] = '\0';
+    }
+
+    return *c;
 }
-int main(){
-    char a[100];
-    fgets(a,sizeof(a), stdin);
+char perfect(char *a){
     uppercase(&a[0]);
     for(int i=0; i<100; i++){ // viet hoa 
+        lowercase(&a[i]);
         if(a[i] >= 97 && a[i] <= 122 && a[i-1] == ' ')
         uppercase(&a[i]);
     }
     lTrim(a);
-    puts(a);
+    rTrim(a);
+    return *a;
+}
+int main(){
+    char a[100][50];
+    for(int i = 0 ; i < 100 ; i++){
+
+    fgets(a[i],sizeof(a), stdin);
+    }
 }
