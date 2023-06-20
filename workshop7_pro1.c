@@ -8,13 +8,13 @@
 int menu()
 {
 	int choice;
-	printf("\n=======================MENU=======================");
-	printf("\n| 1- Add a student                      Press: 1 |");
-	printf("\n| 2- Remove a student                   Press: 2 |");
-	printf("\n| 3- Search a student                   Press: 3 |");
-	printf("\n| 4- Print the list in ascending        Press: 4 |");
-	printf("\n| 5- Quit                               Press: 5 |");
-	printf("\n==================================================\n");
+	printf("\n*************************MENU*********************");
+	printf("\n| 1- Add a student                               |");
+	printf("\n| 2- Remove a student                            |");
+	printf("\n| 3- Search a student                            |");
+	printf("\n| 4- Print the list in ascending                 |");
+	printf("\n| 5- Quit                                        |");
+	printf("\n**************************************************\n");
 	printf("\nEnter Your Choice: ");
 	scanf("%d", &choice);
 	fflush(stdin); 
@@ -62,24 +62,13 @@ char* trim (char s[])
 void addStudent(char names[][31], int *pn)
 {
 	char name[31];
-	int i, exist;
-	do
-	{
+	int i;
+	
 		printf("\nEnter name of student: ");
 		scanf("%[^\n]", name);
 		fflush(stdin);
 		strupr(name);
 		trim(name);
-		exist = 1;
-		for (i = 0; i < *pn; i++)
-			if (strcmp(name, names[i]) == 0)
-			{
-				printf("\nName of student has exist! Enter again!\n");
-				exist = 0;
-				i = *pn - 1;
-			}
-	}
-	while (exist == 0);
 	strcpy(names[*pn], name);
 	(*pn)++;
 }
@@ -89,14 +78,14 @@ void removeStudent(char names[][31], int *pn)
 	printf("\nList of student: \n");
 	int i, j;
 	for (i = 0; i < *pn; i++)
-		printf("[%d]Name: %s\n", i, names[i]);
+		printf("[%d]: %s\n", i+1, names[i]);
 	int remove;
 	printf("\nEnter number of student you wanna remove: ");
 	scanf("%d", &remove);
-	if (remove >= 0 && remove < *pn)
+	if (remove >= 0 && remove <= *pn)
 	{
-		for (j = remove + 1; j < *pn; j++)
-			strcpy(names[j-1], names[j]);
+		for (j = remove + 1 ; j <= *pn; j++)
+			strcpy(names[j-2], names[j-1]);
 		printf("\nRemoved!!!\n");
 		(*pn)--;
 	}
@@ -119,7 +108,7 @@ void searchStudent(char names[][31], int n)
 			if (x == 0)
 			{
 				printf("\nFound it!\n");
-				printf("\nResult: Name[%d]: %s\n", i, names[i]); 
+				printf("\nResult: %d : %s\n", i+1, names[i]); 
 				check = 1;
 			}
 		}
@@ -140,7 +129,7 @@ void printStudent(char names[][31], int *pn)
 		            strcpy(names[j-1], trans);
 				}
 	for (i = 0; i < (*pn); i++)
-		printf("Name[%d]: %s \n", i, names[i]);
+		printf("%d. %s \n", i+1, names[i]);
 }
 
 int main()
@@ -188,5 +177,5 @@ int main()
 	}
 	while (check == 1);
 	printf("\nGood Bye!");
-	getch();
+	return 0 ;
 }
